@@ -13,6 +13,7 @@ jobs:
         with:
           gradle-version: 8.9
       - run: unzip ShizukuFM.zip
+            - run: printf "android.useAndroidX=true\norg.gradle.jvmargs=-Xmx3g\n" > ShizukuFM/gradle.properties
       - run: cd ShizukuFM && gradle assembleDebug
       - uses: actions/upload-artifact@v4
         with:

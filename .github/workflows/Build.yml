@@ -3,6 +3,7 @@ on: [push, workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -18,7 +19,7 @@ jobs:
           echo "android.useAndroidX=true" > ShizukuFM/gradle.properties
           echo "org.gradle.jvmargs=-Xmx3g" >> ShizukuFM/gradle.properties
       - name: Build
-        run: cd ShizukuFM && gradle assembleDebug
+        run: cd ShizukuFM && gradle assembleDebug --no-daemon --console=plain
       - uses: actions/upload-artifact@v4
         with:
           name: app
